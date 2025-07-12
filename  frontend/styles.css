@@ -1,0 +1,5 @@
+body { font-family: Arial, sans-serif; background: #f9f9f9; }
+.container { max-width: 600px; margin: auto; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+label { display: block; margin-top: 1rem; }
+button { margin-top: 1.5rem; padding: 0.5rem 1rem; border: none; background: #007bff; color: #fff; border-radius: 4px; cursor: pointer; }
+#results { margin-top: 2rem; white-space: pre-wrap; background: #eef; padding: 1rem; border-radius: 4px; }
