@@ -1,0 +1,37 @@
+name: Resume Matcher
+on:
+  workflow_dispatch:
+    inputs:
+      resume:
+        description: 'Base64‑encoded resume text'
+        required: true
+      jd:
+        description: 'Base64‑encoded job description text'
+        required: true
+jobs:
+  run-matcher:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install dependencies
+        run: |
+          pip install openai pdfminer.six
+      - name: Decode inputs
+        run: |
+          echo "${{ github.event.inputs.resume }}" | base64 --decode > resume_input.txt
+          echo "${{ github.event.inputs.jd }}"     | base64 --decode > jd_input.txt
+      - name: Run matcher
+        uses: ./actions/matcher
+      - name: Push results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "actions@github.com"
+          mkdir -p results
+          mv report.md results/latest.md
+          git add results/latest.md
+          git commit -m "Add report"
+          git push

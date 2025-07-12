@@ -1,0 +1,9 @@
+name: Matcher Action
+description: 'Extract skills and generate report'
+runs:
+  using: 'composite'
+  steps:
+    - name: Run script
+      shell: bash
+      run: |
+        python3 matcher.py resume_input.txt jd_input.txt report.md
